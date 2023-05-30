@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from pathlib import Path
 import tensorflow as tf
 
@@ -13,7 +13,7 @@ app = Flask(name)
 
 @app.route('/', methods=['GET'])
 def main():
-    return 'Hello world'
+    return render_template('chat.html')
 
 @app.route('/echo', methods=['GET', 'POST'])
 def echo():

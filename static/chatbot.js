@@ -11,14 +11,18 @@ inputForm.addEventListener('submit', async function(event) {
 
   let message = document.createElement('div');
   message.classList.add('chatbot-message', 'user-message');
-  message.innerHTML = `<p class="chatbot-text user-text" sentTime="${currentTime}">${input}</p>`;
+  message.innerHTML = <p class="chatbot-text user-text" sentTime="${currentTime}">${input}</p>;
   conversation.appendChild(message);
 
   const response = await generateResponse(input);
 
   message = document.createElement('div');
   message.classList.add('chatbot-message','chatbot');
-  message.innerHTML = `<p class="chatbot-text" sentTime="${currentTime}">${response}</p>`;
+  message.innerHTML = <p class="chatbot-text" sentTime="${currentTime}">${response}</p>;
   conversation.appendChild(message);
   message.scrollIntoView({behavior: "smooth"});
 });
+
+async function generateResponse(input) {
+    return await (await (await fetch('/get?msg='+input)).json())['bot']
+}
